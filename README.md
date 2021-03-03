@@ -5,7 +5,7 @@
 
 以关键字和简历完整度做为初筛，再然后针对性的看 match 度比较高的简历。
 
->>> 运行截图
+运行截图↓
 ![image](https://user-images.githubusercontent.com/10667077/109767860-20c6ae00-7c33-11eb-8e02-b3d6d8fa3402.png)
 
 
