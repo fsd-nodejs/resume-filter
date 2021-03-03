@@ -3,11 +3,15 @@
 这个程序，是为了帮助招聘时，提升简历筛选的效率。
 以关键字和简历完整度做为初筛，再然后针对性的看 match 度比较高的简历。
 
+![image](https://user-images.githubusercontent.com/10667077/109767860-20c6ae00-7c33-11eb-8e02-b3d6d8fa3402.png)
+
+
 ## TODO
 - [x] 解析PDF简历文件
 - [x] 关键字权重匹配简历内容
 - [ ] 简历完整度检测
 - [ ] hooks接口，自动发送面试邀请邮件，包括但不限于心理测试、在线技术测试题(使用 Showmebug这类平台)
+- [ ] UI界面
 
 ## How to use
 1.将PDF简历放入resume文件夹中
