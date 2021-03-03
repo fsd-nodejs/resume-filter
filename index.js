@@ -11,6 +11,8 @@ const keywords = [
   { key: '@gmail', weight: 3 },
   { key: '本科', weight: 2 },
   { key: '大专', weight: 1 },
+  { key: 'CSRF', weight: 1 },
+  { key: 'XSS', weight: 1 },
 ]
 // 前端工程师筛选关键词(React、小程序)
 
