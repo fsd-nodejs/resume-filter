@@ -6,16 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "tkvern",
   "license": "MIT",
   "dependencies": {
-    "formidable": "^1.2.2",
-    "mammoth": "^1.4.16",
-    "node-stream-zip": "^1.13.2",
-    "office-to-pdf": "^4.0.0",
-    "pdf2json": "^1.2.0",
-    "pdfreader": "^1.2.8",
-    "word-extractor": "^0.3.0",
-    "xlsx": "^0.16.9"
+    "pdf2json": "^1.2.0"
   }
 }
