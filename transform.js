@@ -31,6 +31,10 @@ const readDir = function (resumeDir) {
 const readResume = function (dirs, keywords) {
   return new Promise((resolve) => {
     let resumes = []
+    let max = keywords.reduce((prev, curr) => {
+      if (typeof prev === 'object') return prev.weight + curr.weight
+      return prev + curr.weight
+    })
     ;(function iterator(i) {
       if (i == dirs.length) {
         resolve(resumes)
@@ -39,15 +43,15 @@ const readResume = function (dirs, keywords) {
       pdf2Txt(dirs[i]).then((data) => {
         let weight = 0
         keywords.map((item) => {
-          if (data.indexOf(item) >= 0) {
-            weight++
+          if (data.indexOf(item.key) >= 0) {
+            weight += item.weight
           }
         })
         resumes.push({
           name: dirs[i].split('.pdf')[0].split('resume/')[1],
           path: dirs[i],
           weight,
-          match: ((weight / keywords.length) * 100).toFixed(2) + '%',
+          match: ((weight / max) * 100).toFixed(2) + '%',
           getContent: () => {
             const d = data
             return d
