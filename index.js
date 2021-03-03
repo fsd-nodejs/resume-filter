@@ -8,7 +8,7 @@ const keywords = [
   { key: '小程序', weight: 3 },
   { key: 'Node.js', weight: 1 },
   { key: '热爱技术', weight: 1 },
-  { key: '@gmail', weight: 2 },
+  { key: '@gmail', weight: 3 },
   { key: '本科', weight: 2 },
   { key: '大专', weight: 1 },
 ]
