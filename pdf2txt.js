@@ -1,5 +1,4 @@
-const fs = require('fs'),
-  PDFParser = require('pdf2json')
+const PDFParser = require('pdf2json')
 
 /**
  * 转换pdf为txt

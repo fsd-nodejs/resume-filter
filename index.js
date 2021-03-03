@@ -1,7 +1,8 @@
 const transform = require('./transform')
-const path = require('path')
 const resumeDir = './resume' // 文章所在目录
 
+
+// 前端工程师筛选关键词(React、小程序)
 const keywords = [
   { key: 'github.com', weight: 10 },
   { key: 'React', weight: 3 },
@@ -14,7 +15,6 @@ const keywords = [
   { key: 'CSRF', weight: 1 },
   { key: 'XSS', weight: 1 },
 ]
-// 前端工程师筛选关键词(React、小程序)
 
 const main = async () => {
   // 提取简历内容

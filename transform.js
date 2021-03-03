@@ -2,7 +2,10 @@ const fs = require('fs')
 const path = require('path')
 const { pdf2Txt } = require('./pdf2txt')
 
-// 读取目录下的文件
+/**
+ * 读取目录下的文件
+ * @param {*} resumeDir 简历所在目录
+ */
 const readDir = function (resumeDir) {
   return new Promise((resolve, reject) => {
     fs.readdir(path.join(__dirname, resumeDir), function (err, files) {
@@ -27,7 +30,11 @@ const readDir = function (resumeDir) {
   })
 }
 
-// 提取简历所有的内容
+/**
+ * 提取简历所有的内容
+ * @param {*} dirs 文件路径数组
+ * @param {*} keywords 识别关键字数组
+ */
 const readResume = function (dirs, keywords) {
   return new Promise((resolve) => {
     let resumes = []
