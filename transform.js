@@ -39,9 +39,8 @@ const readResume = function (dirs, keywords) {
   return new Promise((resolve) => {
     let resumes = []
     let max = keywords.reduce((prev, curr) => {
-      if (typeof prev === 'object') return prev.weight + curr.weight
       return prev + curr.weight
-    })
+    }, 0)
     ;(function iterator(i) {
       if (i == dirs.length) {
         resolve(resumes)
