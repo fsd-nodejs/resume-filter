@@ -48,18 +48,41 @@ const readResume = function (dirs, keywords) {
       }
       pdf2Txt(dirs[i]).then((data) => {
         let weight = 0
+        // 匹配关键字
         keywords.map((item) => {
           if (data.indexOf(item.key) >= 0) {
             weight += item.weight
           }
         })
+        const information = {
+          email: data.match(/[\d\w]+\b@[a-zA-ZA-z0-9]+\.[a-z]+/g), // 邮箱检测
+          phone: data.match(
+            /(1[3|4|5|7|8][\d]{9}|0[\d]{2,3}-[\d]{7,8}|400[-]?[\d]{3}[-]?[\d]{4})/g
+          ), // 手机检测
+          website: data.match(/(http:\/\/|https:\/\/)((\w|=|\?|\.|\/|&|-)+)/g), // 个人网站或者github.com检测
+          project: data.match(/项目经历|项目经验/g), // 项目经历检测
+          work: data.match(/工作经历/g), // 工作经历检测
+          education: data.match(/教育经历/g), // 教育经历检测
+          age: data.match(/[\d+]{1,2}岁|出生年月/g), // 年龄检测
+          years: data.match(/[\d+]{1,2}年/g) // 工作年限检测
+        }
         resumes.push({
           name: dirs[i].split('.pdf')[0].split('resume/')[1],
           path: dirs[i],
           weight,
           match: ((weight / max) * 100).toFixed(2) + '%',
+          integrity:
+            (
+              (Object.values(information).filter((item) => !!item).length /
+                Object.keys(information).length) *
+              100
+            ).toFixed(2) + '%',
           getContent: () => {
             const d = data
+            return d
+          },
+          getInformation: () => {
+            const d = information
             return d
           },
         })
