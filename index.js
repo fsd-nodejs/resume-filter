@@ -1,6 +1,5 @@
 const transform = require('./transform')
-const resumeDir = './resume' // 文章所在目录
-
+const resumeDir = './resume' // 简历所在目录
 
 // 前端工程师筛选关键词(React、小程序)
 const keywords = [
