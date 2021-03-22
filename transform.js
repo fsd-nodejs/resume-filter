@@ -1,6 +1,9 @@
 const fs = require('fs')
 const path = require('path')
+const ProgressBar = require('./progress-bar')
 const { pdf2Txt } = require('./pdf2txt')
+
+const pb = new ProgressBar('分析进度', 50)
 
 /**
  * 读取目录下的文件
@@ -42,6 +45,7 @@ const readResume = function (dirs, keywords) {
       return prev + curr.weight
     }, 0)
     ;(function iterator(i) {
+      pb.render({ completed: i, total: dirs.length })
       if (i === dirs.length) {
         resolve(resumes)
         return
@@ -106,11 +110,10 @@ const readResume = function (dirs, keywords) {
  */
 const main = async (resumeDir, keywords) => {
   const dirs = await readDir(resumeDir)
-  const resumes = await readResume(
-    dirs.filter((item) => item.indexOf('pdf') > 0),
-    keywords
-  )
-  console.log('内容提取完成')
+  const pdfs = dirs.filter((item) => item.indexOf('pdf') > 0)
+  console.log('发现简历：', pdfs.length, '件')
+  const resumes = await readResume(pdfs, keywords)
+  console.log('\n内容提取完成')
   return resumes
 }
 
