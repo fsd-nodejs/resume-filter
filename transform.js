@@ -42,7 +42,7 @@ const readResume = function (dirs, keywords) {
       return prev + curr.weight
     }, 0)
     ;(function iterator(i) {
-      if (i == dirs.length) {
+      if (i === dirs.length) {
         resolve(resumes)
         return
       }
@@ -64,19 +64,25 @@ const readResume = function (dirs, keywords) {
           work: data.match(/工作经历/g), // 工作经历检测
           education: data.match(/教育经历/g), // 教育经历检测
           age: data.match(/[\d+]{1,2}岁|出生年月/g), // 年龄检测
-          years: data.match(/[\d+]{1,2}年/g) // 工作年限检测
+          years: data.match(/[\d+]{1,2}年/g), // 工作年限检测
         }
-        resumes.push({
-          name: dirs[i].split('.pdf')[0].split('resume/')[1],
+
+        const integrity =
+          (
+            (Object.values(information).filter((item) => !!item).length /
+              Object.keys(information).length) *
+            100
+          ).toFixed(2) + '%'
+
+        const match = ((weight / max) * 100).toFixed(2) + '%'
+
+        const name = dirs[i].split('.pdf')[0].split('resume/')[1]
+        const newItem = {
+          name,
           path: dirs[i],
           weight,
-          match: ((weight / max) * 100).toFixed(2) + '%',
-          integrity:
-            (
-              (Object.values(information).filter((item) => !!item).length /
-                Object.keys(information).length) *
-              100
-            ).toFixed(2) + '%',
+          match,
+          integrity,
           getContent: () => {
             const d = data
             return d
@@ -85,7 +91,8 @@ const readResume = function (dirs, keywords) {
             const d = information
             return d
           },
-        })
+        }
+        resumes.push(newItem)
         iterator(i + 1)
       })
     })(0)
