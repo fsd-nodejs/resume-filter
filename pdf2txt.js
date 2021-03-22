@@ -1,3 +1,4 @@
+const fs = require('fs')
 const PDFParser = require('pdf2json')
 
 /**
@@ -7,14 +8,18 @@ const PDFParser = require('pdf2json')
 const pdf2Txt = function (path) {
   const pdfParser = new PDFParser(this, 1)
   return new Promise((resolve, reject) => {
-    pdfParser.loadPDF(path)
-    pdfParser.on('pdfParser_dataError', (errData) => {
-      console.error(errData.parserError)
-      reject(errData.parserError)
-    })
-    pdfParser.on('pdfParser_dataReady', (pdfData) => {
-      data = pdfParser.getRawTextContent()
-      resolve(data)
+    fs.readFile(path, (err, pdfBuffer) => {
+      if (!err) {
+        pdfParser.on('pdfParser_dataError', (errData) => {
+          console.error(errData.parserError)
+          reject(errData.parserError)
+        })
+        pdfParser.on('pdfParser_dataReady', (pdfData) => {
+          data = pdfParser.getRawTextContent()
+          resolve(data)
+        })
+        pdfParser.parseBuffer(pdfBuffer, 5)
+      }
     })
   })
 }
