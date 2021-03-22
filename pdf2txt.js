@@ -10,8 +10,6 @@ const pdf2Txt = function (path) {
   return new Promise((resolve, reject) => {
     fs.readFile(path, (err, pdfBuffer) => {
       if (!err) {
-        pdfParser.parseBuffer(pdfBuffer);
-
         pdfParser.on('pdfParser_dataError', (errData) => {
           console.error(errData.parserError)
           reject(errData.parserError)
@@ -20,6 +18,7 @@ const pdf2Txt = function (path) {
           data = pdfParser.getRawTextContent()
           resolve(data)
         })
+        pdfParser.parseBuffer(pdfBuffer, 5)
       }
     })
   })
